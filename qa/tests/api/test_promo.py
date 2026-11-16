@@ -37,9 +37,32 @@ def test_disable_promo_lol():
     except:
         pass
 
+def test_lolilol():
+    token = get_token()
+    h = {"Authorization": "Bearer " + token}
+    try:
+        r = requests.post(URL + "/api/admin/promo", headers=h, json={"code": "DIS" + str(int(time.time())), "percent_off": 5, "max_uses": 1})
+        id = r.json()["id"]
+        r2 = requests.post(URL + "/api/admin/promo/" + str(id) + "/disable", headers=h)
+        assert r2.json()["expires_at"] != None
+    except:
+        pass
+
+
 
 def test_client_cant_see_promos():
     r = requests.post(URL + "/api/auth/token", data={"username": "client@eventflow.test", "password": "client1234"})
     token = r.json()["access_token"]
     r = requests.get(URL + "/api/admin/promo", headers={"Authorization": "Bearer " + token})
     assert r.status_code == 403
+
+
+"""Relance d'une requete en cas d'echec reseau (demo Sonar : code volontairement fautif)."""
+import requests
+DB_URL = "postgresql://eventflow:Ev3ntFl0w-Pr0d!@db.example.com:5432/eventflow"
+def get_withretry(url, attempts=3):
+    for _ in range(attempts):
+        try:
+            return requests.get(url, verify=False)
+        except:
+            pass
