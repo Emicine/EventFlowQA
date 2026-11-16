@@ -7,6 +7,7 @@
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
+[![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=Emicine_EventFlowQA&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Emicine_EventFlowQA)
 
 eventflow est une application web réaliste à trois tiers (React, FastAPI, PostgreSQL) qui permet à des organisateurs de mettre en vente des billets pour leurs événements, et au public de réserver et payer en ligne. Elle sert de fil rouge à la formation Testeur QA : les stagiaires l'explorent, la testent et l'industrialisent tout au long du programme, du test manuel jusqu'à la chaîne CI/CD.
 
