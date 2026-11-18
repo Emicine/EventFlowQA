@@ -1,7 +1,10 @@
 """Petit client HTTP pour l'API EventFlow."""
+
 import requests
 
 from utils.config import API_URL
+
+REQUEST_TIMEOUT = 10
 
 
 class ApiClient:
@@ -19,7 +22,8 @@ class ApiClient:
         r = requests.post(
             f"{self.base_url}/api/auth/token",
             data={"username": email, "password": password},
-            verify=False,
+            verify=False,  # noqa: S501 - l'environnement de recette utilise un certificat auto-signe
+            timeout=REQUEST_TIMEOUT,
         )
         if r.status_code == 200:
             self.set_token(r.json()["access_token"])
@@ -45,10 +49,13 @@ class ApiClient:
         return self.post("/api/orders", json=payload)
 
     def pay(self, order_id, card_number):
-        return self.post(f"/api/orders/{order_id}/pay", json={
-            "card_number": card_number,
-            "exp_month": 12,
-            "exp_year": 2030,
-            "cvc": "123",
-            "cardholder": "QA Bot",
-        })
+        return self.post(
+            f"/api/orders/{order_id}/pay",
+            json={
+                "card_number": card_number,
+                "exp_month": 12,
+                "exp_year": 2030,
+                "cvc": "123",
+                "cardholder": "QA Bot",
+            },
+        )
