@@ -1,0 +1,12 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.4
+    hooks:
+      # Vérification et correction automatique uniquement dans qa/
+      - id: ruff-check
+        args: [--fix]
+        files: ^qa/
+
+      # Formatage uniquement dans qa/
+      - id: ruff-format
+        files: ^qa/
