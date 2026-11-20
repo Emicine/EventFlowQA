@@ -37,7 +37,7 @@ def test_promo2():
             assert p["percent_off"] == 10
 
 
-def test_disable_promo():
+def test_disable_promo_lol():
     token = get_token()
     h = {"Authorization": "Bearer " + token}
     r = requests.post(
